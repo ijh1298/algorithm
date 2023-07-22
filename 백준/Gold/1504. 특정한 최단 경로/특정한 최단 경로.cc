@@ -27,7 +27,8 @@ void dijkstra(int start, int end) {
 		int curNum = pq.top().second;
 		pq.pop();
 
-		if (curDist < d[curNum])
+        //7.22 순서 오타 수정 : 현재 거리 테이블이 더 작으면 갱신하지 않기
+		if (d[curNum] < curDist)
 			continue;
 		
 		for (int i = 0; i < g[curNum].size(); ++i) {
