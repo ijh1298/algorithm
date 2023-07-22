@@ -29,7 +29,7 @@ void dijkstra(int start, int end, bool type) {
 		pq.pop();
         
         //7.22 수정 : curDist가 더 클 때, 거리 테이블 갱신 하지 않으면 시간 복잡도 감소
-        if (d[curNum] < curDist)
+	        if (d[curNum] < curDist)
 			continue;
 
 		for (int i = 0; i < g[curNum].size(); ++i) {
