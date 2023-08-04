@@ -10,6 +10,10 @@ int dist(std::string first, std::string second, std::string third) {
 }
 
 int main(){
+    std::ios::sync_with_stdio(0);
+    std::cin.tie(0);
+    std::cout.tie(0);
+    
     int T;
     std::cin >> T;
 
@@ -28,8 +32,8 @@ int main(){
 
         /* 비둘기집 원리 :
         * n+1 마리의 비둘기가 n개의 비둘기집에 들어가려면 최소한 한 개의 비둘기집에는 두 마리 이상의 비둘기가 들어가야 한다는 원리
-        * N이 33부터는 16 종류의 MBTI 중 같은 MBTI인 사람이 3명 이상 무조건 존재하게 됨
-        * 따라서 N이 33 이상에서 3명의 최소 거리는 0이 됨
+        * N이 33부터는 16종류의 MBTI 중 같은 MBTI인 사람이 3명 이상 무조건 존재함
+        * 따라서 N이 33 이상에서 3명의 최소 거리는 0
         */
         if (N > 16 * 2) {
             std::cout << 0 << '\n';
@@ -43,11 +47,6 @@ int main(){
                 for (int c = b + 1; c < N; ++c)
                     min = std::min(min, dist(v[a], v[b], v[c]));
 
-        /* 비둘기집 원리 :
-        * n+1 마리의 비둘기가 n개의 비둘기집에 들어가려면 최소한 한 개의 비둘기집에는 두 마리 이상의 비둘기가 들어가야 한다는 원리
-        * N이 33부터는 16 종류의 MBTI 중 같은 MBTI인 사람이 3명 이상 무조건 존재하게 됨
-        * 따라서 N이 33 이상에서 3명의 최소 거리는 0이 됨
-        */
         std::cout << min << '\n';
     }
 
