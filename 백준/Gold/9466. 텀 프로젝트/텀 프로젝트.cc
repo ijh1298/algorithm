@@ -10,10 +10,23 @@ bool visit[MAX];
 vector<int> graph[MAX];
 vector<int> route;
 
+void input_make_graph() {
+	vector<int> edge;
+	for (int i = 0; i < N; i++) {
+		int x;
+		cin >> x;
+		edge.emplace_back(x);
+	}
+	for (int i = 0; i < N; i++) { // 단방향
+		graph[i + 1].emplace_back(edge[i]);
+	}
+}
+
 int cycleStart = -1;
 int cycleEnd = -1;
+
 // 방문한 곳을 다시 방문하면 Cycle 존재 (다시 방문하게 되는 지점이 Cycle의 시작점)
-// route 중 cycleStart부터 route의 마지막까지가 하나의 팀이 됨 (단방향 그래프이기 때문)
+// route 중 cycleStart부터 cycleEnd까지가 하나의 팀이 됨 (단방향 그래프이기 때문)
 void dfs(int s) {
 	for (auto next : graph[s]) {
 		if (!visit[next]) {
@@ -29,8 +42,7 @@ void dfs(int s) {
 		}
 	}
 
-	// 탐색한 경로 중 사이클이 존재하면
-	if (cycleStart != -1) {
+	if (cycleStart != -1) { // 탐색한 경로 중 사이클이 존재하면
 		bool isCycle = false;
 		for (auto e : route) {
 			if (isCycle || e == cycleStart)
@@ -63,15 +75,7 @@ int main() {
 	while (T--) {
 		cin >> N;
 		// 그래프 생성
-		vector<int> edge;
-		for (int i = 0; i < N; i++) {
-			int x;
-			cin >> x;
-			edge.emplace_back(x);
-		}
-		for (int i = 0; i < N; i++) { // 단방향
-			graph[i + 1].emplace_back(edge[i]);
-		}
+		input_make_graph();
 
 		// 사이클 찾아내어 사이클 구간을 한 팀으로 묶기
 		for (int i = 1; i <= N; i++) {
