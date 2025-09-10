@@ -12,7 +12,7 @@ fun dfs(next: Int, goal: Int, dist: Int) {
         val (v, w) = t
         if (goal == v) {
             isDone = true
-            bw.write("${dist + w}\n") // ← 수정: dist + w
+            bw.write("${dist + w}\n")
             return
         }
 
