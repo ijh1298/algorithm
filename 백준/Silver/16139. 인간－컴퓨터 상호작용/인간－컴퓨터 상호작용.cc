@@ -1,9 +1,13 @@
 #include <iostream>
 using namespace std;
 
-int alphabet[26][200'000];
+int alphabet[26][200'001];
 
 int main() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
     string name;
     int N;
     cin >> name >> N;
@@ -32,6 +36,5 @@ int main() {
         }
         cout << ans << '\n';
     }
-    
     return 0;
 }
