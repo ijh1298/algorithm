@@ -8,8 +8,6 @@ using namespace std;
 priority_queue<int> pq;
 
 int solution(int n, int k, vector<int> enemy) {
-    int answer = 0;
-
     int totalEnemy = 0;
     for (int i = 0; i < enemy.size(); i++) {
         totalEnemy += enemy[i];
