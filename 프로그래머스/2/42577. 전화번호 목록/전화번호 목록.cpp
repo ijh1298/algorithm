@@ -7,7 +7,9 @@ using namespace std;
 
 unordered_map<string, bool> exists_num;
 
-bool less_length(string a, string b) {
+// const (자료형)& 방식으로 작성하면, 값을 복사하지 않고 원본 값에 접근하므로 성능 효율이 좋다.
+// 즉 쓰기 없이 읽기만 할 경우 다음처럼 작성하자.
+bool less_length(const string& a, const string& b) {
     return a.length() < b.length();
 }
 
@@ -24,13 +26,6 @@ bool solution(vector<string> phone_book) {
             if (exists_num[phone] == true) return false;
         }
         exists_num[phone_book[i]] = true;
-    }
-    
-    // 처음 등록한 0번 인덱스 번호도 검사
-    for (auto c : phone_book[0]) {
-        string phone = "";
-        phone += c;
-        if (exists_num[phone] == true) return false;
     }
     
     return true;
