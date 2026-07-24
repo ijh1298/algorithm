@@ -1,49 +1,47 @@
 #include <vector>
 #include <queue>
-#include <algorithm>
-#include <iostream>
 
 using namespace std;
 
 struct Move {
-    int x;
-    int y;
-    int depth;
+    int x, y, depth;
 };
 
-queue<Move> q;
-bool visit[101][101];
+int answer = -1;
+bool visited[101][101];
 
-int dx[4] = { 0, 1, 0, -1 };
-int dy[4] = { 1, 0, -1, 0 };
+int dx[4] = { -1, 0, 1, 0 };
+int dy[4] = { 0, 1, 0, -1 };
 
-int solution(vector<vector<int>> maps) {
-    int answer = 1e9;
-    
-    // BFS
+void bfs(int n, int m, vector<vector<int>>& maps) {
+    queue<Move> q;
     q.push({0, 0, 1});
-    visit[0][0] = true;
+    visited[0][0] = true;
+    
     while (!q.empty()) {
         auto [x, y, depth] = q.front();
         q.pop();
         
-        if (x == maps.size() - 1 && y == maps[0].size() - 1) {
-            answer = min(answer, depth);
+        // 도착 시
+        if (x == n - 1 && y == m - 1) {
+            answer = depth;
+            return;
         }
         
         for (int i = 0; i < 4; i++) {
             int nextX = x + dx[i];
             int nextY = y + dy[i];
             
-            if (nextX < 0 || nextX >= maps.size() || nextY < 0 || nextY >= maps[0].size()) continue;
-            if (visit[nextX][nextY] || maps[nextX][nextY] == 0) continue;
+            if (visited[nextX][nextY] || nextX < 0 || nextX >= n || nextY < 0 || nextY >= m || maps[nextX][nextY] == 0)
+                continue;
             
-            visit[nextX][nextY] = true;
-            Move nextMove{nextX, nextY, depth + 1};
-            q.push(nextMove);
+            visited[nextX][nextY] = true;
+            q.push({nextX, nextY, depth + 1});
         }
     }
-    
-    if (answer == 1e9) return -1;
+}
+
+int solution(vector<vector<int>> maps) {
+    bfs(maps.size(), maps[0].size(), maps);
     return answer;
 }
